@@ -18,10 +18,7 @@
 
 	<section class="container-box">
 
-		<div class="container-beer"
-				 ontouchstart="handleTouchStart(event)"
-				 ontouchmove="handleTouchMove(event)"
-				 ontouchend="handleTouchEnd(event)">
+		<div class="container-beer">
 			<div id="tap-container">
 				<div id="tap"></div>
 				<div id="handle"></div>
@@ -59,18 +56,21 @@
 			percentFilled = (beerHeight / mugHeight) * 100;
 			roundedPercent = Math.round(percentFilled);
 			document.getElementById('percent-filled').innerHTML = 'Nível de Gastrol no Sangue ' + roundedPercent + '%';
-		};
+		}
 
-		function handleTouchStart(event) {
-			event.preventDefault();
+		document.getElementById('handle').addEventListener('mouseenter', startAnimation);
+		document.getElementById('handle').addEventListener('mouseleave', stopAnimation);
+		document.addEventListener('touchstart', startAnimation);
+		document.addEventListener('touchend', stopAnimation);
+
+		function startAnimation() {
 			document.getElementById('beer').classList.add('fill');
 			document.getElementById('beer').style.animationPlayState = 'running';
 			document.getElementById('pour').classList.add('pouring');
 			animate(); // Inicia o loop de animação
 		}
 
-		function handleTouchEnd(event) {
-			event.preventDefault();
+		function stopAnimation() {
 			document.getElementById('beer').style.animationPlayState = 'paused';
 			document.getElementById('pour').classList.remove('pouring');
 			animationPaused = true; // Define a animação como pausada
@@ -85,7 +85,6 @@
 			document.getElementById('img').src = imageSrc;
 		}
 
-
 		function animate() {
 			animationPaused = false; // Define a animação como não pausada
 			animationInterval = setInterval(function () {
@@ -93,11 +92,9 @@
 				if (percentFilled >= 20 && percentFilled <= 25) {
 					document.getElementById('title').innerText = 'Agora me tornei o Super Gastrol Pagodeiro, sim eu existo';
 					swapImageWithDelay('img/2.jpg', 1000); // Troca a imagem com delay de 1 segundo
-
 				} else if (percentFilled > 50 && percentFilled <= 60) {
 					document.getElementById('title').innerText = 'Gastrol é como música para os meus ouvidos';
 					swapImageWithDelay('img/3.jpg', 1000);
-
 				} else if (percentFilled > 80 && percentFilled <= 90) {
 					document.getElementById('title').innerText = 'AHHHHHHH SOU O SUPER INSTINTO SUPERIOR GASTROL SAYADIN COLOSSAL';
 					swapImageWithDelay('img/4.jpeg', 1000);
@@ -105,6 +102,7 @@
 				getHeights(); // Atualiza a porcentagem em tempo real
 			}, 100); // Intervalo de atualização em milissegundos
 		}
+
 	</script>
 
 </body>
