@@ -16,12 +16,6 @@ h1, h2, h3, h4 {
 	position: relative;
 }
 
-#tap-container {
-	/* position: absolute;
-	top: 0;
-	left: 0; */
-}
-
 #tap {
 	width: 120px;
 	background: #ddd;
