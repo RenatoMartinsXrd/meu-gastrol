@@ -56,6 +56,12 @@
 			document.getElementById('percent-filled').innerHTML = 'Nível de Gastrol no Sangue ' + roundedPercent + '%';
 		}
 
+		function scrollIntoBeer() {
+			document.querySelector('.container-beer').scrollIntoView({
+				behavior: 'smooth'
+			});
+		}
+
 		document.getElementById('handle').addEventListener('mouseenter', startAnimation);
 		document.getElementById('handle').addEventListener('mouseleave', stopAnimation);
 		document.getElementById('handle').addEventListener('touchstart', handleTouchStart);
@@ -70,6 +76,7 @@
 
 		function handleTouchStart(evt) {
 			evt.preventDefault();
+			scrollIntoBeer();
 			document.querySelector("#handle").style.transform = 'rotate(6deg)';
 			startAnimation();
 		}
