@@ -39,16 +39,6 @@
 					 id="img">
 		</div>
 	</section>
-
-	<div id="customAlert"
-			 class="hidden">
-		<div class="customAlertContent">
-			<img src="img/1.jpg"
-					 alt="Alert Image">
-			<p>Seu texto personalizado aqui</p>
-			<button>Continuar para o proximo nivel</button>
-		</div>
-	</div>
 	<script>
 		var mugHeight;
 		var beerHeight;
@@ -64,16 +54,6 @@
 			percentFilled = (beerHeight / mugHeight) * 100;
 			roundedPercent = Math.round(percentFilled);
 			document.getElementById('percent-filled').innerHTML = 'Nível de Gastrol no Sangue ' + roundedPercent + '%';
-		}
-
-		function showCustomAlert() {
-			var customAlert = document.getElementById('customAlert');
-			customAlert.classList.remove('hidden');
-		}
-
-		function removeShowCustomAlert() {
-			var customAlert = document.getElementById('customAlert');
-			customAlert.classList.add('hidden');
 		}
 
 		document.getElementById('handle').addEventListener('mouseenter', startAnimation);
