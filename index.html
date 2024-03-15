@@ -62,6 +62,7 @@
 		document.getElementById('handle').addEventListener('mouseleave', stopAnimation);
 		document.addEventListener('touchstart', startAnimation);
 		document.addEventListener('touchend', stopAnimation);
+		document.addEventListener('touchcancel', stopAnimation);
 		document.addEventListener('touchmove', handleTouchMove);
 
 		function startAnimation() {
