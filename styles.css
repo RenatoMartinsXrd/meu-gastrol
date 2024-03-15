@@ -84,12 +84,12 @@ h1, h2, h3, h4, p {
 	border-radius: 20px 20px 10px 10px
 }
 
-#handle:hover {
+#handle:hover, #handle:focus, #handle:active {
 	transform: rotate(6deg);
 	transform-origin: center bottom;
 }
 
-#handle:hover:before {
+#handle:hover::before, #handle:focus::before, #handle:active::before {
 	transform: rotate(0deg);
 }
 

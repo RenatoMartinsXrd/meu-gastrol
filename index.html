@@ -58,18 +58,9 @@
 			document.getElementById('percent-filled').innerHTML = 'Nível de Gastrol no Sangue ' + roundedPercent + '%';
 		}
 
-		function clearHover() {
-			const handle = document.getElementById('handle');
-			handle.style.transform = 'none';
-			handle.style.transformOrigin = 'initial';
-
-			const handleBefore = document.querySelector('#handle:before');
-			handleBefore.style.transform = 'none';
-		}
-
 		document.getElementById('handle').addEventListener('mouseenter', startAnimation);
 		document.getElementById('handle').addEventListener('mouseleave', stopAnimation);
-		document.getElementById('handle').addEventListener('touchstart', startAnimation);
+		document.getElementById('handle').addEventListener('touchstart', handleTouchStart);
 		document.getElementById('handle').addEventListener('touchend', handleTouchEnd);
 
 		function startAnimation() {
@@ -79,27 +70,24 @@
 			animate(); // Inicia o loop de animação
 		}
 
+		function handleTouchStart(evt) {
+			evt.preventDefault();
+			document.querySelector("#handle").style.transform = 'rotate(6deg)';
+			startAnimation();
+		}
+
 		function handleTouchEnd(evt) {
 			evt.preventDefault();
-			clearHover();
+			document.querySelector("#handle").style.transform = 'rotate(0deg)';
 			stopAnimation();
 		}
 
 		function stopAnimation() {
-			console.log();
 			document.getElementById('beer').style.animationPlayState = 'paused';
 			document.getElementById('pour').classList.remove('pouring');
 			animationPaused = true; // Define a animação como pausada
 			clearInterval(animationInterval); // Pára o loop de animação
 		}
-
-		// function handleTouchMove(event) {
-		// 	// Verifique se a animação está pausada
-		// 	if (animationPaused) {
-		// 		// Se estiver pausada, reinicie a animação
-		// 		startAnimation();
-		// 	}
-		// }
 
 		function swapImageWithDelay(imageSrc, delay) {
 			document.getElementById('img').src = imageSrc;
