@@ -58,10 +58,19 @@
 			document.getElementById('percent-filled').innerHTML = 'Nível de Gastrol no Sangue ' + roundedPercent + '%';
 		}
 
+		function clearHover() {
+			const handle = document.getElementById('handle');
+			handle.style.transform = 'none';
+			handle.style.transformOrigin = 'initial';
+
+			const handleBefore = document.querySelector('#handle:before');
+			handleBefore.style.transform = 'none';
+		}
+
 		document.getElementById('handle').addEventListener('mouseenter', startAnimation);
 		document.getElementById('handle').addEventListener('mouseleave', stopAnimation);
 		document.getElementById('handle').addEventListener('touchstart', startAnimation);
-		document.getElementById('handle').addEventListener('touchend', stopAnimation);
+		document.getElementById('handle').addEventListener('touchend', handleTouchEnd);
 
 		function startAnimation() {
 			document.getElementById('beer').classList.add('fill');
@@ -70,7 +79,14 @@
 			animate(); // Inicia o loop de animação
 		}
 
+		function handleTouchEnd(evt) {
+			evt.preventDefault();
+			clearHover();
+			stopAnimation();
+		}
+
 		function stopAnimation() {
+			console.log();
 			document.getElementById('beer').style.animationPlayState = 'paused';
 			document.getElementById('pour').classList.remove('pouring');
 			animationPaused = true; // Define a animação como pausada
@@ -92,7 +108,6 @@
 		function animate() {
 			animationPaused = false; // Define a animação como não pausada
 			animationInterval = setInterval(function () {
-				console.log(percentFilled);
 				if (percentFilled >= 20 && percentFilled <= 25) {
 					document.getElementById('title').innerText = 'Agora me tornei o Super Gastrol Pagodeiro, sim eu existo';
 					swapImageWithDelay('img/2.jpg', 1000); // Troca a imagem com delay de 1 segundo
