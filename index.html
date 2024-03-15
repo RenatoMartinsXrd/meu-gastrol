@@ -11,8 +11,7 @@
 </head>
 
 <body>
-	<p class="helper tap">Encha a caneca de gastrol</p>
-	<h1>Encha a caneca de gastrol</h1>
+	<h1 class="title-1">Encha a caneca de gastrol</h1>
 	<h2 id="percent-filled">Nível de Gastrol no Sangue 0%</h2>
 	<h3 id="result"></h3>
 
@@ -41,6 +40,15 @@
 		</div>
 	</section>
 
+	<div id="customAlert"
+			 class="hidden">
+		<div class="customAlertContent">
+			<img src="img/1.jpg"
+					 alt="Alert Image">
+			<p>Seu texto personalizado aqui</p>
+			<button>Continuar para o proximo nivel</button>
+		</div>
+	</div>
 	<script>
 		var mugHeight;
 		var beerHeight;
@@ -56,6 +64,16 @@
 			percentFilled = (beerHeight / mugHeight) * 100;
 			roundedPercent = Math.round(percentFilled);
 			document.getElementById('percent-filled').innerHTML = 'Nível de Gastrol no Sangue ' + roundedPercent + '%';
+		}
+
+		function showCustomAlert() {
+			var customAlert = document.getElementById('customAlert');
+			customAlert.classList.remove('hidden');
+		}
+
+		function removeShowCustomAlert() {
+			var customAlert = document.getElementById('customAlert');
+			customAlert.classList.add('hidden');
 		}
 
 		document.getElementById('handle').addEventListener('mouseenter', startAnimation);
