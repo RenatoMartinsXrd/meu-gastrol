@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+				content="width=device-width, initial-scale=1.0">
+	<title>Beer Game</title>
+	<link rel="stylesheet"
+				href="styles.css">
+</head>
+
+<body>
+	<p class="helper tap">Encha a caneca de gastrol</p>
+	<h1>Encha a caneca de gastrol</h1>
+	<h2 id="percent-filled">Nível de Gastrol no Sangue 0%</h2>
+	<h3 id="result"></h3>
+
+	<section class="container-box">
+
+		<div class="container-beer">
+			<div id="tap-container">
+				<div id="tap"></div>
+				<div id="handle"></div>
+				<div id="pour"></div>
+			</div>
+
+			<div id="mug-container">
+				<div id="mug">
+					<div id="beer"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="container-reaction">
+			<p id="title">Veja as minhas transformações do gastrol</p>
+			<img src="img/1.jpg"
+					 alt=""
+					 id="img">
+		</div>
+	</section>
+
+	<script>
+		var mugHeight;
+		var beerHeight;
+		var percentFilled;
+		var roundedPercent;
+		var game = Math.floor((Math.random() * 100) + 1);
+		var animationInterval; // Variável global para armazenar o intervalo de animação
+		var animationPaused = false; // Variável para controlar o estado da animação
+
+		function getHeights() {
+			mugHeight = document.getElementById('mug').offsetHeight;
+			beerHeight = document.getElementById('beer').offsetHeight;
+			percentFilled = (beerHeight / mugHeight) * 100;
+			roundedPercent = Math.round(percentFilled);
+			document.getElementById('percent-filled').innerHTML = 'Nível de Gastrol no Sangue ' + roundedPercent + '%';
+		};
+
+		document.getElementById('handle').addEventListener('mouseenter', function () {
+			document.getElementById('beer').classList.add('fill');
+			document.getElementById('beer').style.animationPlayState = 'running';
+			document.getElementById('pour').classList.add('pouring');
+			animate(); // Inicia o loop de animação
+		});
+
+		document.getElementById('handle').addEventListener('mouseleave', function () {
+			document.getElementById('beer').style.animationPlayState = 'paused';
+			document.getElementById('pour').classList.remove('pouring');
+			animationPaused = true; // Define a animação como pausada
+			clearInterval(animationInterval); // Pára o loop de animação
+		});
+
+		function swapImageWithDelay(imageSrc, delay) {
+			document.getElementById('img').src = imageSrc;
+		}
+
+
+		function animate() {
+			animationPaused = false; // Define a animação como não pausada
+			animationInterval = setInterval(function () {
+				console.log(percentFilled);
+				if (percentFilled >= 20 && percentFilled <= 25) {
+					document.getElementById('title').innerText = 'Agora me tornei o Super Gastrol Pagodeiro, sim eu existo';
+					swapImageWithDelay('img/2.jpg', 1000); // Troca a imagem com delay de 1 segundo
+
+				} else if (percentFilled > 50 && percentFilled <= 60) {
+					document.getElementById('title').innerText = 'Gastrol é como música para os meus ouvidos';
+					swapImageWithDelay('img/3.jpg', 1000);
+
+				} else if (percentFilled > 80 && percentFilled <= 90) {
+					document.getElementById('title').innerText = 'AHHHHHHH SOU O SUPER INSTINTO SUPERIOR GASTROL SAYADIN COLOSSAL';
+					swapImageWithDelay('img/4.jpeg', 1000);
+				}
+				getHeights(); // Atualiza a porcentagem em tempo real
+			}, 100); // Intervalo de atualização em milissegundos
+		}
+	</script>
+
+</body>
+
+</html>
