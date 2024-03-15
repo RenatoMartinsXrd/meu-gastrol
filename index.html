@@ -62,6 +62,7 @@
 		document.getElementById('handle').addEventListener('mouseleave', stopAnimation);
 		document.addEventListener('touchstart', startAnimation);
 		document.addEventListener('touchend', stopAnimation);
+		document.addEventListener('touchmove', handleTouchMove);
 
 		function startAnimation() {
 			document.getElementById('beer').classList.add('fill');
@@ -78,7 +79,11 @@
 		}
 
 		function handleTouchMove(event) {
-			event.preventDefault();
+			// Verifique se a animação está pausada
+			if (animationPaused) {
+				// Se estiver pausada, reinicie a animação
+				startAnimation();
+			}
 		}
 
 		function swapImageWithDelay(imageSrc, delay) {
