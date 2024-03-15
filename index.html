@@ -18,7 +18,10 @@
 
 	<section class="container-box">
 
-		<div class="container-beer">
+		<div class="container-beer"
+				 ontouchstart="handleTouchStart(event)"
+				 ontouchmove="handleTouchMove(event)"
+				 ontouchend="handleTouchEnd(event)">
 			<div id="tap-container">
 				<div id="tap"></div>
 				<div id="handle"></div>
@@ -58,19 +61,25 @@
 			document.getElementById('percent-filled').innerHTML = 'Nível de Gastrol no Sangue ' + roundedPercent + '%';
 		};
 
-		document.getElementById('handle').addEventListener('mouseenter', function () {
+		function handleTouchStart(event) {
+			event.preventDefault();
 			document.getElementById('beer').classList.add('fill');
 			document.getElementById('beer').style.animationPlayState = 'running';
 			document.getElementById('pour').classList.add('pouring');
 			animate(); // Inicia o loop de animação
-		});
+		}
 
-		document.getElementById('handle').addEventListener('mouseleave', function () {
+		function handleTouchEnd(event) {
+			event.preventDefault();
 			document.getElementById('beer').style.animationPlayState = 'paused';
 			document.getElementById('pour').classList.remove('pouring');
 			animationPaused = true; // Define a animação como pausada
 			clearInterval(animationInterval); // Pára o loop de animação
-		});
+		}
+
+		function handleTouchMove(event) {
+			event.preventDefault();
+		}
 
 		function swapImageWithDelay(imageSrc, delay) {
 			document.getElementById('img').src = imageSrc;
