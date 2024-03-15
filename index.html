@@ -38,6 +38,14 @@
 					 alt=""
 					 id="img">
 		</div>
+
+		<div id="customAlert"
+				 class="hidden">
+			<div class="customAlertContent">
+				<img src="img/4.jpeg"
+						 alt="Alert Image">
+			</div>
+		</div>
 	</section>
 	<script>
 		var mugHeight;
@@ -97,6 +105,12 @@
 			document.getElementById('img').src = imageSrc;
 		}
 
+		function showCustomAlert() {
+			var customAlert = document.getElementById('customAlert');
+			customAlert.classList.remove('hidden');
+			document.getElementById('percent-filled').innerHTML = 'Nível de Gastrol no Sangue ' + 100 + '%';
+		}
+
 		function animate() {
 			animationPaused = false; // Define a animação como não pausada
 			animationInterval = setInterval(function () {
@@ -106,9 +120,13 @@
 				} else if (percentFilled > 50 && percentFilled <= 60) {
 					document.getElementById('title').innerText = 'Gastrol é como música para os meus ouvidos';
 					swapImageWithDelay('img/3.jpg', 1000);
-				} else if (percentFilled > 80 && percentFilled <= 90) {
+				} else if (percentFilled > 70 && percentFilled <= 85) {
 					document.getElementById('title').innerText = 'AHHHHHHH SOU O SUPER INSTINTO SUPERIOR GASTROL SAYADIN COLOSSAL';
 					swapImageWithDelay('img/4.jpeg', 1000);
+
+					setTimeout(() => {
+						showCustomAlert();
+					}, 1500);
 				}
 				getHeights(); // Atualiza a porcentagem em tempo real
 			}, 100); // Intervalo de atualização em milissegundos
