@@ -60,10 +60,8 @@
 
 		document.getElementById('handle').addEventListener('mouseenter', startAnimation);
 		document.getElementById('handle').addEventListener('mouseleave', stopAnimation);
-		document.addEventListener('touchstart', startAnimation);
-		document.addEventListener('touchend', stopAnimation);
-		document.addEventListener('touchcancel', stopAnimation);
-		document.addEventListener('touchmove', handleTouchMove);
+		document.getElementById('handle').addEventListener('touchstart', startAnimation);
+		document.getElementById('handle').addEventListener('touchend', stopAnimation);
 
 		function startAnimation() {
 			document.getElementById('beer').classList.add('fill');
@@ -79,13 +77,13 @@
 			clearInterval(animationInterval); // Pára o loop de animação
 		}
 
-		function handleTouchMove(event) {
-			// Verifique se a animação está pausada
-			if (animationPaused) {
-				// Se estiver pausada, reinicie a animação
-				startAnimation();
-			}
-		}
+		// function handleTouchMove(event) {
+		// 	// Verifique se a animação está pausada
+		// 	if (animationPaused) {
+		// 		// Se estiver pausada, reinicie a animação
+		// 		startAnimation();
+		// 	}
+		// }
 
 		function swapImageWithDelay(imageSrc, delay) {
 			document.getElementById('img').src = imageSrc;
